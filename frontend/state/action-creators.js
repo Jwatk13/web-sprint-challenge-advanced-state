@@ -8,7 +8,12 @@ export function moveClockwise(amount) {
   }
  }
 
-export function moveCounterClockwise() { }
+export function moveCounterClockwise(amount) {
+  return {
+    type: types.MOVE_COUNTERCLOCKWISE,
+    payload: amount
+  }
+ }
 
 export function selectAnswer() { }
 
