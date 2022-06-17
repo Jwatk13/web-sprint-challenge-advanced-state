@@ -16,7 +16,12 @@ export function moveCounterClockwise(amount) {
   }
  }
 
-export function selectAnswer() { }
+export function selectAnswer(action) {
+  return {
+    type: types.SET_SELECTED_ANSWER,
+    payload: action
+  }
+ }
 
 export function setMessage() { }
 
