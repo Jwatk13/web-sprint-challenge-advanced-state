@@ -1,6 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import React from 'react';
+
+import { connect } from 'react-redux';
+import * as actionCreators from '../state/action-creators';
 
 export function Form(props) {
 
