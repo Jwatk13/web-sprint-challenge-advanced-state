@@ -7,7 +7,7 @@ export function Quiz(props) {
   useEffect(() => {
     props.fetchQuiz()
   }, [])
-
+  
   return (
     <div id="wrapper">
       {props.quiz !==
@@ -15,25 +15,25 @@ export function Quiz(props) {
         // 
         null ? (
           <>
-            <h2>{props.quiz.question}</h2>
+            <h2>{props.quiz.question}</h2>{console.log(props.quiz)}
 
             <div id="quizAnswers">
-              <div className={props.quiz.answers[0] === null ? "answer" : "answer selected"}>
-                {/* {// a fetch request for the answers/} */}A function
+              <div className={null === null ? "answer" : "answer selected"}>
+                {props.quiz.answers[0].text}
                 <button onClick={null/**setSelectedAnswer */}>
                   Select
                 </button>
               </div>
 
-              <div className={props.quiz.answers[1] === null ? "answer" : "answer selected"}>
-                An elephant
+              <div className={null === null ? "answer" : "answer selected"}>
+                {props.quiz.answers[1].text}
                 <button onClick={null/**setSelectedAnswer */}>
                   Select
                 </button>
               </div>
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button id="submitAnswerBtn" disabled={true}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
