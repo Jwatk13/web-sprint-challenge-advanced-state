@@ -41,7 +41,7 @@ export function Quiz(props) {
               </div>
             </div>
 
-            <button id="submitAnswerBtn" disabled={true}>Submit answer</button>
+            <button id="submitAnswerBtn" disabled={props.selectedAnswer === null ? true : false}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
