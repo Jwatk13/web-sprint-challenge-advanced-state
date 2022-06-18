@@ -8,6 +8,8 @@ export function Quiz(props) {
     props.fetchQuiz()
   }, [])
   
+
+  
   return (
     <div id="wrapper">
       {props.quiz !==
@@ -15,7 +17,7 @@ export function Quiz(props) {
         // 
         null ? (
           <>
-            <h2>{props.quiz.question}</h2>{console.log(props.quiz)}
+            <h2>{props.quiz.question}</h2>{console.log(props.selectedAnswer)}
 
             <div id="quizAnswers">
               <div 
@@ -43,8 +45,14 @@ export function Quiz(props) {
 
             <button 
               id="submitAnswerBtn" 
-              disabled={props.selectedAnswer === null ? true : false} 
-              onClick={props.fetchQuiz}
+              onClick={() => {
+                props.setMessage(props.selectedAnswer === 
+                props.quiz.answers[0].answer_id 
+                ? "Nice job! That was the correct answer" 
+                : "What a shame! That was the incorrect answer");
+                props.fetchQuiz()
+              }}
+              disabled={props.selectedAnswer === null ? true : false}
             >
                 Submit answer
             </button>

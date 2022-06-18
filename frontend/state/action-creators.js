@@ -23,7 +23,12 @@ export function selectAnswer(action) {
   }
  }
 
-export function setMessage() { }
+export function setMessage(message) {
+  return {
+    type: types.SET_INFO_MESSAGE,
+    payload: message
+  }
+ }
 
 export function setQuiz() {
   return {
@@ -43,6 +48,7 @@ export function fetchQuiz() {
       dispatch(setQuiz())
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
+        console.log(res)
         dispatch({ type: types.SET_QUIZ_INTO_STATE, payload: res.data })
       })
       .catch(err => {
