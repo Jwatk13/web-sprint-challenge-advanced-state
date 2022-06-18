@@ -8,7 +8,8 @@ export function Form(props) {
   const { form } = props
 
   const onChange = evt => {
-  
+    const { id, value } = evt.target
+    props.inputChange({ id, value })
   }
 
   
@@ -23,19 +24,22 @@ export function Form(props) {
         maxLength={50} 
         onChange={onChange} 
         id="newQuestion" 
-        placeholder="Enter question" 
+        placeholder="Enter question"
+        value={form.newQuestion} 
       />
       <input 
         maxLength={50} 
         onChange={onChange} 
         id="newTrueAnswer" 
         placeholder="Enter true answer"
+        value={form.newTrueAnswer}
       />
       <input 
         maxLength={50} 
         onChange={onChange} 
         id="newFalseAnswer" 
-        placeholder="Enter false answer" 
+        placeholder="Enter false answer"
+        value={form.newFalseAnswer} 
       />
       <button 
         id="submitNewQuizBtn" 

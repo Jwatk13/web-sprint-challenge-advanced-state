@@ -38,10 +38,10 @@ export function setQuiz() {
 }
   
 
-export function inputChange() {
+export function inputChange({ id, value }) {
   return {
     type: types.INPUT_CHANGE,
-    payload: {}
+    payload: { id, value }
  }
 }
 
