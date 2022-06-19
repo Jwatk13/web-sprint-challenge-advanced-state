@@ -15,6 +15,7 @@ export function Form(props) {
   
   const onSubmit = evt => {
     evt.preventDefault()
+    props.postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer)
   }
 
   return (
@@ -45,7 +46,7 @@ export function Form(props) {
         id="submitNewQuizBtn" 
         disabled={form.newQuestion.trim().length && form.newTrueAnswer.trim().length && form.newFalseAnswer.trim().length > 1 ? false : true}
       >
-        Submit new quiz{console.log(form)}
+        Submit new quiz
       </button>
     </form>
     

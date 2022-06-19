@@ -6,9 +6,8 @@ import * as actions from '../state/action-creators';
 export function Quiz(props) {
   useEffect(() => {
     props.fetchQuiz()
+    props.postAnswer()
   }, [])
-  
-
   
   return (
     <div id="wrapper">
@@ -17,7 +16,7 @@ export function Quiz(props) {
         // 
         null ? (
           <>
-            <h2>{props.quiz.question}</h2>{console.log(props.selectedAnswer)}
+            <h2>{props.quiz.question}</h2>
 
             <div id="quizAnswers">
               <div 

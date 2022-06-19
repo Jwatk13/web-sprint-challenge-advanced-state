@@ -45,7 +45,16 @@ export function inputChange({ id, value }) {
  }
 }
 
-export function resetForm() { }
+export function resetForm() {
+  return {
+    type: types.RESET_FORM,
+    payload: {
+      newQuestion: '',
+      newTrueAnswer: '',
+      newFalseAnswer: '',
+    }
+  }
+ }
 
 // ❗ Async action creators
 export function fetchQuiz() {
@@ -53,7 +62,7 @@ export function fetchQuiz() {
       dispatch(setQuiz())
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
-        console.log(res)
+        console.log(res.data)
         dispatch({ type: types.SET_QUIZ_INTO_STATE, payload: res.data })
       })
       .catch(err => {
@@ -64,16 +73,36 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer() {
+export function postAnswer( id ) {
   return function (dispatch) {
+    axios.post(`http://localhost:9000/api/quiz/answer`, { "quiz_id": id, "answer_id": id })
+      .then(res => {
+        console.log(res)
+        dispatch({
+          type: types.SET_QUIZ_INTO_STATE, payload: res.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
 }
-export function postQuiz() {
+export function postQuiz( newQuestion, newTrueAnswer, newFalseAnswer ) {
   return function (dispatch) {
+    axios.post(`http://localhost:9000/api/quiz/new`, { "question_text": `${newQuestion}`, "true_answer_text": `${newTrueAnswer}`, "false_answer_text": `${newFalseAnswer}` })
+      .then(res => {
+        console.log(res)
+        dispatch(setMessage(`Congrats: "${newQuestion}" is a great question!`))
+        dispatch({
+          type: types.INPUT_CHANGE, payload: res.data })
+        dispatch(resetForm())
+      })
+      .catch(err => {
+        console.log(err)
+      })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
