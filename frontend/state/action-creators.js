@@ -47,12 +47,7 @@ export function inputChange({ id, value }) {
 
 export function resetForm() {
   return {
-    type: types.RESET_FORM,
-    payload: {
-      newQuestion: '',
-      newTrueAnswer: '',
-      newFalseAnswer: '',
-    }
+    type: types.RESET_FORM
   }
  }
 
@@ -98,7 +93,9 @@ export function postQuiz( newQuestion, newTrueAnswer, newFalseAnswer ) {
         dispatch(setMessage(`Congrats: "${newQuestion}" is a great question!`))
         dispatch({
           type: types.INPUT_CHANGE, payload: res.data })
-        dispatch(resetForm())
+        dispatch({
+          type: types.RESET_FORM
+        })
       })
       .catch(err => {
         console.log(err)

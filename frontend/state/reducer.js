@@ -58,7 +58,7 @@ function form(state = initialFormState, action) {
       return { ...state, [id]: value }
     } 
     case types.RESET_FORM: 
-      return state
+      return initialFormState
     default:
       return state
   }
