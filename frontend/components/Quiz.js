@@ -5,7 +5,8 @@ import * as actions from '../state/action-creators';
 
 export function Quiz(props) {
   useEffect(() => {
-    props.fetchQuiz()
+    if (!props.quiz)
+      props.fetchQuiz()
   }, [])
   
   return (
