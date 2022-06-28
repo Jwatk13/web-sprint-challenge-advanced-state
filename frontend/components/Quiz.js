@@ -6,7 +6,6 @@ import * as actions from '../state/action-creators';
 export function Quiz(props) {
   useEffect(() => {
     props.fetchQuiz()
-    props.postAnswer()
   }, [])
   
   return (
@@ -24,7 +23,7 @@ export function Quiz(props) {
               >
                 {props.quiz.answers[0].text}
                 <button 
-                  onClick={() => props.selectAnswer(props.quiz.answers[0].answer_id)}
+                  onClick={() => {props.selectAnswer(props.quiz.answers[0].answer_id)}}
                 >
                   {props.selectedAnswer === props.quiz.answers[0].answer_id ? "SELECTED" : "Select"}
                 </button>
@@ -44,13 +43,7 @@ export function Quiz(props) {
 
             <button 
               id="submitAnswerBtn" 
-              onClick={() => {
-                props.setMessage(props.selectedAnswer === 
-                props.quiz.answers[0].answer_id 
-                ? "Nice job! That was the correct answer" 
-                : "What a shame! That was the incorrect answer");
-                props.fetchQuiz()
-              }}
+              onClick={() => props.postAnswer(props.quiz.quiz_id, props.selectedAnswer) }
               disabled={props.selectedAnswer === null ? true : false}
             >
                 Submit answer

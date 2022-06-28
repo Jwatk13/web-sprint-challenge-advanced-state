@@ -5,4 +5,4 @@ export const SET_QUIZ_INTO_STATE = 'SET_QUIZ_INTO_STATE' //Completed
 export const SET_SELECTED_ANSWER = 'SET_SELECTED_ANSWER' //Completed
 export const SET_INFO_MESSAGE = 'SET_INFO_MESSAGE' //Completed
 export const INPUT_CHANGE = 'INPUT_CHANGE' //Completed
-export const RESET_FORM = 'RESET_FORM' // Untouched
+export const RESET_FORM = 'RESET_FORM' //Completed

@@ -16,10 +16,10 @@ export function moveCounterClockwise(amount) {
   }
  }
 
-export function selectAnswer(action) {
+export function selectAnswer(answer) {
   return {
     type: types.SET_SELECTED_ANSWER,
-    payload: action
+    payload: answer
   }
  }
 
@@ -57,7 +57,7 @@ export function fetchQuiz() {
       dispatch(setQuiz())
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         dispatch({ type: types.SET_QUIZ_INTO_STATE, payload: res.data })
       })
       .catch(err => {
@@ -68,13 +68,19 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer( id ) {
+
+export function postAnswer( qID ,aID) {
   return function (dispatch) {
-    axios.post(`http://localhost:9000/api/quiz/answer`, { "quiz_id": id, "answer_id": id })
+    axios.post(`http://localhost:9000/api/quiz/answer`, { quiz_id: qID, answer_id: aID })
       .then(res => {
-        console.log(res)
+        console.log(res.data)
         dispatch({
-          type: types.SET_QUIZ_INTO_STATE, payload: res.data })
+          type: types.SET_SELECTED_ANSWER, payload: null
+        })
+        dispatch({
+          type: types.SET_INFO_MESSAGE, payload: res.data.message
+        })
+        dispatch(fetchQuiz())
       })
       .catch(err => {
         console.log(err)
@@ -83,8 +89,12 @@ export function postAnswer( id ) {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
+
+    // props.selectedAnswer === props.quiz.answers[0].answer_id ? "Nice job! That was the correct answer" 
+        // : "What a shame! That was the incorrect answer"))
   }
 }
+
 export function postQuiz( newQuestion, newTrueAnswer, newFalseAnswer ) {
   return function (dispatch) {
     axios.post(`http://localhost:9000/api/quiz/new`, { "question_text": `${newQuestion}`, "true_answer_text": `${newTrueAnswer}`, "false_answer_text": `${newFalseAnswer}` })
